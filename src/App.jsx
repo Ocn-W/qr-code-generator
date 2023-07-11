@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, {useState} from 'react';
+import QRCode from 'react-qr-code';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [qrVal, setQrVal] = useState(''); 
+  const [generatedQrVal, setGenQrVal] = useState('');
+  const [showQr, setShowQr] = useState(false);
+
+  function handleChange(e){
+    setQrVal(e.target.value)
+  }
+
+  function handleKeyPress(e){
+    e.key === 'Enter' && generateQr();
+  }
+
+  function generateQr(){
+    qrVal && (
+      setShowQr(true),
+      setGenQrVal(qrVal)
+      );
+
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <main>
+      <section>
+        <h1>
+          Enter a URL to Generate Your QR Code!
+        </h1>
+        <div className='qrCode'>
+          {showQr ? <QRCode size={200} bgColor='white' fgColor='black' value={generatedQrVal}/> : <h2>QR Box</h2>}
+        </div>
+        <div style={{display:'flex', alignItems:'center'}}>
+          <input type='text' placeholder='Your url or text..' onChange={handleChange} onKeyDown={handleKeyPress}/>
+          <button onClick={generateQr}>Generate</button>
+        </div>
+      </section>
+    </main>
   )
 }
-
-export default App
