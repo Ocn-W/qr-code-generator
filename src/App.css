@@ -16,7 +16,7 @@ section {
     display: flex;
     align-items: center;
     gap: 30px;
-    padding: 20px 0;
+    padding: 20px;
     justify-content: center;
     flex-direction: column;
 }
@@ -45,13 +45,27 @@ section h1 {
     font-weight: 300;
 }
 
-input {
+.dwnlBtn {
+    color: blue;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 0.5;
+}
+.dwnlBtn:hover {
+    text-decoration: underline;
+}
+.dwnlBtn:active {
+    color: darkblue;
+}
+
+.genQr input {
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
     border: none;
     height: 30px;
 }
 
-section button {
+.genQr button {
     background-color: rgb(2, 205, 2);
     border: none;
     display: flex;
@@ -64,9 +78,33 @@ section button {
     border-radius: 10px;
     cursor: pointer;
 }
-section button:hover {
+.genQr button:hover {
     box-shadow: 0 0 5px black;
 }
-section button:active {
+.genQr button:active {
     box-shadow: none;
+}
+
+.colorPicker {
+    display: flex;
+    box-shadow: none;
+    flex-direction: row;
+    text-align: center;
+    width: 90%;
+    border-radius: 0;
+}
+
+.colorPicker p {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.fg-box,
+.bg-box {
+    width: 100%;
+}
+
+.colorPicker input {
+    box-shadow: none;
+    border: 1px dotted grey;
 }
