@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import QRCode from "react-qr-code";
 import "./App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
 export default function App() {
   const [qrVal, setQrVal] = useState("");
@@ -8,6 +10,17 @@ export default function App() {
   const [showQr, setShowQr] = useState(false);
   const [fgColor, setFgColor] = useState("#000000");
   const [bgColor, setBgColor] = useState("#ffffff");
+  const [theme, setTheme] = useState('light');
+  let sun = window.document.getElementById('sun')
+  let moon = window.document.getElementById('moon');
+
+  function toggleTheme(){
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  }
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
 
   //set state value for qr code
   function handleChange(e) {
@@ -61,6 +74,10 @@ export default function App() {
 
   return (
     <main>
+      <button className="themeToggle" onClick={toggleTheme}>
+        <FontAwesomeIcon icon={faSun} className={theme === 'light' ? 'light-active' : ''}/>
+        <FontAwesomeIcon icon={faMoon} className={theme === 'dark' ? 'dark-active' : ''}/>
+      </button>
       <section>
         {showQr ? (
           <section className="colorPicker">
