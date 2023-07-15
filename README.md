@@ -4,7 +4,7 @@
  
 This website makes use of the library [React QR Code](https://www.npmjs.com/package/react-qr-code) to generate your custom text or url into a QR Code! You may also change the colors and download it for use on your webpage, business cards, whatever!
 
-![QRGenSite](https://github.com/Ocn-W/qr-code-generator/assets/112736754/dba3769b-570a-409e-a81f-3054f86616cd)
+![QRGeneratorSite](https://github.com/Ocn-W/qr-code-generator/assets/112736754/f9b6b6d1-6aff-4369-88db-1c6670e2c8ee)
 
 ## User Guide
 
