@@ -50,27 +50,34 @@ export default function App() {
       : alert("Please Enter your text or URL of choice!");
   }
 
-  // converts the QRCode SVG element to an image by rendering it onto a canvas,
-  //converting the canvas content to a PNG Data URL,
-  //and then triggering the download of the resulting image.
-  function downloadQR() {
-    const svg = document.getElementById("QRCode");
-    const svgData = new XMLSerializer().serializeToString(svg);
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    const img = new Image();
-    img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
-      const pngFile = canvas.toDataURL("image/png");
-      const downloadLink = document.createElement("a");
-      downloadLink.download = "QRCode";
-      downloadLink.href = `${pngFile}`;
-      downloadLink.click();
-    };
-    img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
-  }
+// converts the QRCode SVG element to an image by rendering it onto a canvas,
+//converting the canvas content to a PNG Data URL,
+//and then triggering the download of the resulting image.
+function downloadQR() {
+  const svg = document.getElementById("QRCode");
+  const svgData = new XMLSerializer().serializeToString(svg);
+  const canvas = document.createElement("canvas");
+  // Increase the scale factor to get a higher resolution image (e.g., 2x, 3x, etc.).
+  const scale = 2;
+  const canvasWidth = svg.width.baseVal.value * scale;
+  const canvasHeight = svg.height.baseVal.value * scale;
+  const ctx = canvas.getContext("2d");
+  const img = new Image();
+  img.onload = () => {
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+    // Scale the image up to match the canvas size for higher resolution.
+    ctx.scale(scale, scale);
+    ctx.drawImage(img, 0, 0);
+    const pngFile = canvas.toDataURL("image/png");
+    const downloadLink = document.createElement("a");
+    downloadLink.download = "QRCode";
+    downloadLink.href = `${pngFile}`;
+    downloadLink.click();
+  };
+  img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
+}
+
 
   return (
     <main>
